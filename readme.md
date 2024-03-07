@@ -1,7 +1,7 @@
 
 # vTikz
 
-A simple but power-full tool for creating standalone Tikz figures in V.
+A simple design to generate standalone tikz images in V.
 
 ## Installation
 
