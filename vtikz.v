@@ -25,10 +25,10 @@ const header := ["\\documentclass[tikz]{standalone}\n",
 
 pub struct Tikz {
 mut:
-	pref Pref
 	axis Axis
 pub mut:
 	plots []Plot
+	pref Pref
 }
 
 pub fn Tikz.new(xlabel string, ylabel string, title string) Tikz {
