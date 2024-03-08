@@ -78,6 +78,7 @@ mut:
 }
 
 fn (a Axis) map_axis_to_string()map[string]string {
+	// TODO: Change to array?
 	mut result := map[string]string{}
 	if a.axis_3d != unsafe{ nil } {
 		result['colormap'] = '{${a.axis_3d.cmap.to_string()}}'
@@ -113,6 +114,7 @@ fn (a Axis) map_axis_to_string()map[string]string {
 fn (a Axis) to_string() string {
 	mut s := ''
 	s += '\\begin{axis}['
+
 	data := a.map_axis_to_string()
 
 	mut counter := 0

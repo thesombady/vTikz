@@ -8,7 +8,7 @@ A simple design to generate standalone tikz images in V.
 To install vtikz, run the following command in your shell/terminal:
 
 ```bash
-v install --git https://thesombady/vtikz
+v install --git https://github.com/thesombady/vtikz
 ```
 
 This requires the V package manager to be installed, and for compiling the generated .tex file, a LaTeX distribution is required with tikz and pgfplots, for example: texlive, miktex, etc.
@@ -112,4 +112,3 @@ tikz.axis.xtick = [f32(1), 2.5, 5] //All values must be f32.
 tikz.plot('scatter_plot.tex') // Save the plot to a .tex file
 
 ```
-
