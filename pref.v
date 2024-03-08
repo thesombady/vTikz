@@ -7,13 +7,13 @@ pub enum Compiler {
 	texlive
 }
 
-struct Pref {
+pub struct Pref {
 	font_size u8 = 12
 	font_style string = "Arial"
 mut:
 	compiler Compiler = .pdflatex
-	keep_tex bool
-	open_pdf bool = true
 pub mut:
 	show_legends bool
+	keep_tex bool
+	open_pdf bool = true
 }
