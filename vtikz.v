@@ -1,7 +1,7 @@
 module vtikz
 import os
 import time
-import math
+// import math
 
 // set_parameters([]string) returns a string with the parameters
 fn set_parameters(parameters []string) string {
