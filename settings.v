@@ -26,6 +26,10 @@ pub fn (mut t Tikz) set_mark(index int, mark Mark) {
 		eprintln("Error: Index out of range")
 		return
 	}
+	if t.plots[index] !is Scatter_plot {
+		eprintln("Error: Plot is not a scatter plot")
+		return
+	}
 	t.plots[index].mark = mark
 }
 

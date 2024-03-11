@@ -69,7 +69,7 @@ pub enum Mark {
 	o
 }
 
-fn (m Mark_style) to_string() string {
+fn (m Mark) to_string() string {
 	return match m {
 		.square { 'square' }
 		.o { 'o' }
