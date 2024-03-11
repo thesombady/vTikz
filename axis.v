@@ -1,7 +1,5 @@
 module vtikz
 
-
-
 pub enum Legend_pos {
 	north_west
 	north_east
@@ -54,7 +52,29 @@ mut:
 	zlabel string = "z"
 	ydomain [2]f32 = [f32(-1.0), 1.0]!
 pub mut:
-	fill string 
+	fill Fill 
+}
+
+pub enum Fill {
+	@none
+	white
+	black
+	yellow
+	red
+	blue
+	green
+}
+
+fn (f Fill) to_string() string {
+	return match f {
+		@none { 'none' }
+		.white { 'white' }
+		.black { 'black' }
+		.yellow { 'yellow' }
+		.red { 'red' }
+		.blue { 'blue' }
+		.green { 'green' }
+	}
 }
 
 struct Axis {

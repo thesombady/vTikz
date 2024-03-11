@@ -48,3 +48,17 @@ mut:
 	plot Plot_type
 	style string = 'solid'
 }
+
+pub enum Style {
+	solid
+	dashed
+	dotted
+}
+
+fn (s Style) to_string() string {
+	return match s {
+		.solid { 'solid' }
+		.dashed { 'dashed' }
+		.dotted { 'dotted' }
+	}
+}

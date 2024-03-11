@@ -27,7 +27,7 @@ fn (t Tikz) to_enviroment() Enviroment {
 			header: "\\begin{tikzpicture}\n",
 			foot: "\\end{tikzpicture}\n"
 		},
-		header: header.join(''),
+		header: vtikz.header.join('\n'),
 		foot: "\\end{document}\n"
 	}
 
