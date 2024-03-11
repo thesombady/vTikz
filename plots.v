@@ -46,7 +46,7 @@ struct Plot {
 	legend string
 mut:
 	plot Plot_type
-	style string = 'solid'
+	style Style = .solid
 }
 
 pub enum Style {
