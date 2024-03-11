@@ -10,7 +10,7 @@ struct Scatter_plot {
 	y []f32
 	color string
 mut:
-	mark Mark_style = .line
+	mark Mark = .line
 }
 
 struct Function3d {
@@ -60,5 +60,19 @@ fn (s Style) to_string() string {
 		.solid { 'solid' }
 		.dashed { 'dashed' }
 		.dotted { 'dotted' }
+	}
+}
+
+pub enum Mark {
+	line
+	square
+	o
+}
+
+fn (m Mark_style) to_string() string {
+	return match m {
+		.square { 'square' }
+		.o { 'o' }
+		.line { 'none' }
 	}
 }

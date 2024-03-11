@@ -149,17 +149,3 @@ fn (a Axis) to_string() string {
 	
 	return s
 }
-
-enum Mark_style {
-	line
-	square
-	o
-}
-
-fn (m Mark_style) to_string() string {
-	return match m {
-		.square { 'square' }
-		.o { 'o' }
-		.line { 'none' }
-	}
-}
