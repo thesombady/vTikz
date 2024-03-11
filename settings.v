@@ -52,7 +52,7 @@ pub fn (mut t Tikz) set_cmap(c Cmap) {
 }
 
 pub fn (mut t Tikz) set_legend_pos(pos Legend_pos) {
-	t.pref.legend_pos = pos
+	t.axis.legend_pos = pos
 }
 
 pub fn (mut t Tikz) set_axis_line(line Axis_line) {
@@ -60,5 +60,5 @@ pub fn (mut t Tikz) set_axis_line(line Axis_line) {
 }
 
 pub fn (mut t Tikz) set_xtick(ticks []f32) {
-	t.axis.xticks = ticks
+	t.axis.xtick = ticks
 }
