@@ -1,6 +1,6 @@
 module vtikz
 
-pub enum Color_map {
+pub enum Cmap{
 	jet
 	hot
 	hot2
@@ -14,7 +14,7 @@ pub enum Color_map {
 	pubu
 }
 
-fn (c Color_map) to_string() string {
+fn (c Cmap) to_string() string {
 	return match c {
 		.jet { 'colormap/jet' }
 		.hot { 'colormap/hot' }

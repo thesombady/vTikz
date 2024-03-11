@@ -46,7 +46,7 @@ fn (a Axis_line) to_string() string {
 
 struct Axis_3d {
 mut:
-	cmap Color_map = .jet
+	cmap Cmap = .jet
 	cbar bool = true
 	box bool = true
 	zlabel string = "z"

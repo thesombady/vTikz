@@ -20,7 +20,9 @@ fn test_scatter() {
 
 	tikz.add_scatter(x_data, y_data, 'red', 'label')
 
+	tikz.set_mark(0, vtikz.Mark.square)
 
+	tikz.set_style(0, vtikz.Style.dashed)
 
 	tikz.plot(
 		'scatter.tex'
