@@ -50,3 +50,15 @@ pub fn (mut t Tikz) set_fill(fill Fill) {
 pub fn (mut t Tikz) set_cmap(c Cmap) {
 	t.axis.axis_3d.cmap = c
 }
+
+pub fn (mut t Tikz) set_legend_pos(pos Legend_pos) {
+	t.pref.legend_pos = pos
+}
+
+pub fn (mut t Tikz) set_axis_line(line Axis_line) {
+	t.axis.axis_line = line
+}
+
+pub fn (mut t Tikz) set_xtick(ticks []f32) {
+	t.axis.xticks = ticks
+}

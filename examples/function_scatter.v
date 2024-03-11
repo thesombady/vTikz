@@ -8,7 +8,7 @@ tikz.add_function("x^2", "red", "$ x^2$", [f32(-1.0), 1.0]!)
 // tikz.pref.keep_tex = true
 
 tikz.add_scatter([f32(0.0), 1, 2, 3], [f32(0.0), 1, 4, 9], "blue", "Experimental")
-if tikz.plots[1].plot is Scatter_plot {
-	tikz.plots[1].plot.mark = .o
-}
+
+tikz.set_mark(1, vtikz.Mark.o)
+
 tikz.plot('potential.tex')

@@ -20,10 +20,9 @@ tikz.add_scatter(x_data, y_data, 'red', 'label')
 
 // the xlim will be set to the min and max of the x_data unless we dont specify otherwise
 
-// By default, the plot will ahve marker style of a line, we can change that
-if tikz.plot[0].plot is Scatter_plot {
-	tikz.plot[0].plot.marker_style = .o // Now it will be circles
-}
+// By deault the style will be a solid line, we can change that by doing the following
+tikz.set_style(0, vtikz.LineStyle.dashed)
+
 
 tikz.plot(
 	'scatter.tex'

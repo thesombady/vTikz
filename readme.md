@@ -64,7 +64,7 @@ For more examples, see the [Examples](examples) directory.
 ### Scatter Plot
 
 ```v
-import thesombady.vtikz
+import vtikz
 
 x := [f32(1), 2, 3, 4, 5]
 y := [f32(1), 4, 10, 15, 26] // Assume this to be experimental data of x^2
@@ -87,27 +87,28 @@ tikz.add_function(
 // When adding the second plot the xlimits are set to the range of the enitre data set, i.e. [1, 5]!, and vtikz will automatically show the legends when adding the second plot
 
 // We can change the compiler by changing the preference structure
-tikz.pref.compiler = .texlive // The default is .pdflatex and we have .@none
+tikz.set_compiler(vtikz.Compiler.texlive)
+// The default is .pdflatex and we have .@none
 
 // If we dont want the .tex file to be compiled, we can set the field keep_tex to true
-tikz.pref.keep_tex = true
+tikz.set_keep_tex(true)
 
 // If we dont want the pdf to automatically open, we do the following:
-tikz.pref.open_pdf = false
+tikz.set_open_pdf(false)
 
 // Note, all the auxiliary files are deleted.
 
 // If you want to change the legend position, you can do the following:
 
-tikz.axis.legend_pos = .north_east // The default is .north_west
+tikz.set_legend_pos(vtikz.Legend_pos.north_east) // This is the same as the above
 
 // Iff you want to change the alignment of the graph, you can do the following:
 
-tikz.axis.axis_line = .center // The default is .left
+tikz.set_axis_line(.center)
 
 // If the standard tick labels are not what you want, you can change them by doing the following:
 
-tikz.axis.xtick = [f32(1), 2.5, 5] //All values must be f32.
+tikz.set_xtick([f32(1), 2.5, 5])//All values must be f32.
 
 tikz.plot('scatter_plot.tex') // Save the plot to a .tex file
 
