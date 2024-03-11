@@ -22,7 +22,7 @@ const header := ["\\documentclass[tikz]{standalone}",
 	"\\usepackage{pgfplotstable}",
 	"\\pgfplotsset{compat=1.18}",
 	"\\begin{document}",
-	"\\usepgfplotslibrary{colorbrewer}"]
+	"\\usepgfplotslibrary{colorbrewer}\n"]
 
 pub struct Tikz {
 mut:

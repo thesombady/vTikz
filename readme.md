@@ -81,7 +81,7 @@ tikz.add_function(
     "x^2", // The function
     'red', // The color
     'Fitted data', // The line style
-    [3, 5]! // The range of x (Not in agreement with the data, but for the sake of the example)
+    [f32(3), 5]! // The range of x (Not in agreement with the data, but for the sake of the example)
 )
 
 // When adding the second plot the xlimits are set to the range of the enitre data set, i.e. [1, 5]!, and vtikz will automatically show the legends when adding the second plot

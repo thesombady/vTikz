@@ -115,10 +115,24 @@ fn (a Axis) map_axis_to_string()map[string]string {
 	result['samples'] = 'samples = {${a.samples}}'
 	result['domain'] = 'domain = {${a.xlim[0]}:${a.xlim[1]}}'
 	if a.xtick.len != 0 {
-		result['xtick'] = 'xtick = {${a.xtick}}'
+		mut xtick := ''
+		for i, v in a.xtick {
+			xtick += '${v}'
+			if i < a.xtick.len - 1 {
+				xtick += ','
+			}
+		}	
+		result['xtick'] = 'xtick = {${xtick}}'
 	}
 	if a.ytick.len != 0 {
-		result['ytick'] = 'ytick = {${a.ytick}}'
+		mut ytick := ''
+		for i, v in a.ytick {
+			ytick += '${v}'
+			if i < a.ytick.len - 1 {
+				ytick += ','
+			}
+		}
+		result['ytick'] = 'ytick = {${ytick}}'
 	}
 	result['legend_pos'] = 'legend pos = {${a.legend_pos.to_string()}}'
 	result['grid_style'] = 'grid style = {${a.grid_style}}'
