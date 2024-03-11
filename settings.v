@@ -26,7 +26,8 @@ pub fn (mut t Tikz) set_mark(index int, mark Mark) {
 		eprintln("Error: Index out of range")
 		return
 	}
-	if t.plots[index] is Scatter_plot {
+	
+	if t.plots[index].plot is Scatter_plot {
 		t.plots[index].plot.mark = mark
 	} else {
 		eprintln("Error: Plot is not a scatter plot")
