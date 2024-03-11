@@ -34,6 +34,8 @@ The following are the types of plots that can be created in vTikz:
     * This mode supports mesh and surface plots. Each of these can be customized with the color map, and in the specific case of surface plot, also the fill-color (by default white).
 5. Bar plots (Not yet implemented)
     * Bar plots are a series of data, where each data point is represented by a bar. These bars can be customized to different colors and patterns.
+6. Logarithmic plots
+    * The x and y-axis can be set to logarithmic scales.
 
 # Structure of the package
 
