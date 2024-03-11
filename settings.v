@@ -1,7 +1,7 @@
 module vtikz
 
 
-pub fn (mut t Tikz) set_compiler(compiler vtikz.Compiler) {
+pub fn (mut t Tikz) set_compiler(compiler Compiler) {
 	t.pref.compiler = compiler
 }
 
@@ -21,7 +21,7 @@ pub fn (mut t Tikz) set_samples(samples int) {
 	t.axis.samples = samples
 }
 
-pub fn (mut t Tikz) set_mark(index int, mark vtikz.Mark) {
+pub fn (mut t Tikz) set_mark(index int, mark Mark) {
 	if index >= t.plots.len {
 		eprintln("Error: Index out of range")
 		return
@@ -29,7 +29,7 @@ pub fn (mut t Tikz) set_mark(index int, mark vtikz.Mark) {
 	t.plots[index].mark = mark
 }
 
-pub fn (mut t Tikz) set_style(index int, style vtikz.Style) {
+pub fn (mut t Tikz) set_style(index int, style Style) {
 	if index >= t.plots.len {
 		eprintln("Error: Index out of range")
 		return
@@ -37,6 +37,6 @@ pub fn (mut t Tikz) set_style(index int, style vtikz.Style) {
 	t.plots[index].style = style
 }
 
-pub fn (mut t Tikz) set_fill(fill vtikz.Fill) {
+pub fn (mut t Tikz) set_fill(fill Fill) {
 	t.axis.axis_3d.fill = fill
 }
