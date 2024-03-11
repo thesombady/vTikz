@@ -67,7 +67,7 @@ pub enum Fill {
 
 fn (f Fill) to_string() string {
 	return match f {
-		@none { 'none' }
+		.@none { 'none' }
 		.white { 'white' }
 		.black { 'black' }
 		.yellow { 'yellow' }

@@ -2,7 +2,7 @@ import vtikz
 
 // Generate tikz object
 
-fn main() {
+fn test_scatter() {
 
 	mut tikz := vtikz.Tikz.new(
 		'xlabel',

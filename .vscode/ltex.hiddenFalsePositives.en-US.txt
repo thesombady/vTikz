@@ -1,0 +1,1 @@
+{"rule":"PHRASE_REPETITION","sentence":"^\\QScatter Plots\nScatter plots are a series of data, where each data point is represented by a marker.\\E$"}

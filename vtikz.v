@@ -178,7 +178,7 @@ fn (t Tikz) content(mut axis_content []string, idx int) string {
 		}
 		Function_plot {
 			axis_content[idx] += '\t' + set_command("addplot", ['color = ${id.plot.color}',
-				 'style = ${id.style.to_string}'], true) + ' {${id.plot.func}};\n'
+				 'style = ${id.style.to_string()}'], true) + ' {${id.plot.func}};\n'
 		}		
 		Scatter3d {
 			eprintln('Not yet implemented correctly')
@@ -290,42 +290,3 @@ fn remove_aux(path string) {
 	}
 }
 
-pub fn (mut t Tikz) set_compiler(compiler Compiler) {
-	t.pref.compiler = compiler
-}
-
-pub fn (mut t Tikz) set_keep_tex(keep bool) {
-	t.pref.keep_tex = keep
-}
-
-pub fn (mut t Tikz) set_open_pdf(open bool) {
-	t.pref.open_pdf = open
-}
-
-pub fn (mut t Tikz) set_show_legends(show bool) {
-	t.pref.show_legends = show
-}
-
-pub fn (mut t Tikz) set_samples(samples int) {
-	t.axis.samples = samples
-}
-
-pub fn (mut t Tikz) set_mark(index int, mark Mark) {
-	if index >= t.plots.len {
-		eprintln("Error: Index out of range")
-		return
-	}
-	t.plots[index].mark = mark
-}
-
-pub fn (mut t Tikz) set_style(index int, style Style) {
-	if index >= t.plots.len {
-		eprintln("Error: Index out of range")
-		return
-	}
-	t.plots[index].style = style
-}
-
-pub fn (mut t Tikz) set_fill(fill Fill) {
-	t.axis.axis_3d.fill = fill
-}
