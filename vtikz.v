@@ -174,8 +174,7 @@ fn (t Tikz) content(mut axis_content []string, idx int) string {
 				 'style = ${id.style.to_string()}'], true) + ' {${id.plot.func}};\n'
 		}		
 		Scatter3d {
-			eprintln('Not yet implemented correctly')
-			panic()
+			panic('Not yet implemented correctly')
 			/*
 			axis_content[idx] += '\t' + set_command("addplot3", ['${id.plot.type_.to_string()}'], true) + 'table {\n'
 			length := id.plot.x.len
