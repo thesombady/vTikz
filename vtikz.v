@@ -1,7 +1,7 @@
 module vtikz
 import os
 import time
-// import math
+import math
 
 // set_parameters([]string) returns a string with the parameters
 fn set_parameters(parameters []string) string {
@@ -16,13 +16,6 @@ fn set_parameters(parameters []string) string {
 	return result
 
 }
-
-const header := ["\\documentclass[tikz]{standalone}",
-	"\\usepackage{pgfplots}",
-	"\\usepackage{pgfplotstable}",
-	"\\pgfplotsset{compat=1.18}",
-	"\\begin{document}",
-	"\\usepgfplotslibrary{colorbrewer}\n"]
 
 pub struct Tikz {
 mut:
@@ -182,6 +175,7 @@ fn (t Tikz) content(mut axis_content []string, idx int) string {
 		}		
 		Scatter3d {
 			eprintln('Not yet implemented correctly')
+			return
 			/*
 			axis_content[idx] += '\t' + set_command("addplot3", ['${id.plot.type_.to_string()}'], true) + 'table {\n'
 			length := id.plot.x.len

@@ -1,5 +1,12 @@
 module vtikz
 
+const header := ["\\documentclass[tikz]{standalone}",
+	"\\usepackage{pgfplots}",
+	"\\usepackage{pgfplotstable}",
+	"\\pgfplotsset{compat=1.18}",
+	"\\begin{document}",
+	"\\usepgfplotslibrary{colorbrewer}\n"]
+
 struct Enviroment {
 	body &Enviroment
 	name string
