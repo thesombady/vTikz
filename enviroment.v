@@ -34,6 +34,7 @@ fn (t Tikz) to_enviroment() Enviroment {
 			header: "\\begin{tikzpicture}\n",
 			foot: "\\end{tikzpicture}\n"
 		},
+		
 		header: vtikz.preamble.join('\n'),
 		foot: "\\end{document}\n"
 	}
