@@ -1,7 +1,7 @@
 
 # vTikz
 
-A simple design to generate standalone tikz images in V.
+A simple way to generate standalone tikz figures in V, worthy of scientific publications.
 
 ## Installation
 
@@ -13,6 +13,25 @@ v install --git https://github.com/thesombady/vtikz
 
 This requires the V package manager to be installed, and for compiling the generated .tex file, a LaTeX distribution is required with tikz and pgfplots, for example: texlive, miktex, etc.
 One change the latex compiler by changing the `compiler` field in the preference structure.
+
+## Why vTikz?
+
+Why would you use vTikz over other plotting libraries? Some libraries are complicated to use, and some does not generate standalone figures. In vTikz, the figures are standalone, and can be used in any LaTex document.
+Moreover, vTikz is simple to use, and the default settings are set to generate figures that are on par with scientific publications. The user can easily customize major aspects of the figures, such as:
+
+1. Axis labels
+2. Title
+3. Legend position
+4. Axis alignment
+5. Line style
+6. Marker style
+7. Fillers in 3d plots
+8. Color maps
+9. Ticks labels, and much more.
+
+vTikz is designed to be simple to use, and generate standalone tikz figures, with the option to keep the .tex file after compilation (with readable tex code).
+
+![Squared function](#examples/squared.pdf)
 
 ## Usage
 
