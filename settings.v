@@ -44,11 +44,11 @@ pub fn (mut t Tikz) set_style(index int, style Style) {
 }
 
 pub fn (mut t Tikz) set_fill(fill Fill) {
-	t.axis.axis_3d.fill = fill
+	t.axis.options_3d.fill = fill
 }
 
 pub fn (mut t Tikz) set_cmap(c Cmap) {
-	t.axis.axis_3d.cmap = c
+	t.axis.options_3d.cmap = c
 }
 
 pub fn (mut t Tikz) set_legend_pos(pos Legend_pos) {
