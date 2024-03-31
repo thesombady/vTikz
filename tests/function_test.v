@@ -6,9 +6,9 @@ import vtikz
 fn test_function () {
 
 	mut tikz := vtikz.Tikz.new(
-		'xlabel',
-		'ylabel',
-		'title'
+		's [t]',
+		'height [m]',
+		'Height of a ball thrown up in the air',
 	)
 
 	/*
@@ -20,9 +20,9 @@ fn test_function () {
 			xlim: [2]f32, e.g. [f32(-10), 10]!
 		)
 	*/
-	tikz.add_function('x^2', 'red', '$ x^2$', [f32(-3), 3]!)
+	tikz.add_function('-0.5 * x^2 + 0.5', 'red', '$ x^2$', [f32(0.1), 1]!)
 	// Even though we give it a legend, it will not be shown unless we force it, or give another function
-	 // tikz.pref.show_legend = true
+	 // tikz.set_show_legeneds(true)
 
 	tikz.set_keep_tex(true)
 
