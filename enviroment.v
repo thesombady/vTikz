@@ -25,10 +25,10 @@ fn (t Tikz) to_enviroment() Enviroment {
 		body: &Enviroment {
 			name: "tikzpicture",
 			body: &Enviroment {
-				name: '${t.axis_style.to_string()}'
+				name: '${t.axis.axis_style.to_string()}'
 				header: t.axis.to_string(),
 				content: t.content(mut content, 0),
-				foot: '\\end{${t.axis_style.to_string()}}\n',
+				foot: '\\end{${t.axis.axis_style.to_string()}}\n',
 				body : unsafe { nil }
 			},
 			header: "\\begin{tikzpicture}\n",
