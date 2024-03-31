@@ -1,6 +1,6 @@
 module vtikz
 
-const header := ["\\documentclass[tikz]{standalone}",
+const preamble := ["\\documentclass[tikz]{standalone}",
 	"\\usepackage{pgfplots}",
 	"\\usepackage{pgfplotstable}",
 	"\\pgfplotsset{compat=1.18}",
@@ -25,16 +25,16 @@ fn (t Tikz) to_enviroment() Enviroment {
 		body: &Enviroment {
 			name: "tikzpicture",
 			body: &Enviroment {
-				name: 'axis'
+				name: '${t.axis_style.to_string()}'
 				header: t.axis.to_string(),
 				content: t.content(mut content, 0),
-				foot: '\\end{axis}\n',
+				foot: '\\end{${t.axis_style.to_string()}}\n',
 				body : unsafe { nil }
 			},
 			header: "\\begin{tikzpicture}\n",
 			foot: "\\end{tikzpicture}\n"
 		},
-		header: vtikz.header.join('\n'),
+		header: vtikz.preamble.join('\n'),
 		foot: "\\end{document}\n"
 	}
 
