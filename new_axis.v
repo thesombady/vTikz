@@ -110,10 +110,10 @@ fn (a Axis) map_options() map[string]string{
 	mut result := map[string]string{}
 
 	if a.options_3d != unsafe{ nil } {
-		result['colormap'] = '${a.axis_3d.cmap.to_string()}'
+		result['colormap'] = '${a.options3d.cmap.to_string()}'
 		//result['box'] = 'box = {${a.axis_3d.box}}'
-		result['zlabel'] = '{${a.axis_3d.zlabel}}'
-		result['y domain'] = '{${a.axis_3d.ydomain[0]}:${a.axis_3d.ydomain[1]}}'
+		result['zlabel'] = '{${a.options_3d.zlabel}}'
+		result['y domain'] = '{${a.options_3d.ydomain[0]}:${a.options_3d.ydomain[1]}}'
 	}
 
 	result['title'] = a.title
