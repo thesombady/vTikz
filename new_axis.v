@@ -170,7 +170,7 @@ fn (a Axis) to_string() string {
 		
 	}
 
-	result += '\t\t]'
+	result += '\t]\n'
 
 	return result
 }
