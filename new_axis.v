@@ -150,7 +150,7 @@ fn (a Axis) map_options() map[string]string{
 fn (a axis) to_string() string {
 	mut result := '\\begin{${a.axis_style.to_string()}}['
 	options := a.map_options()
-	mut cbar = false
+	mut cbar := false
 
 	if a.options_3d != unsafe { nil } {
 		cbar = true
