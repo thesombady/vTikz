@@ -159,7 +159,6 @@ fn (a Axis) to_string() string {
 
 	if cbar {
 		result += 'colorbar,'
-
 	}
 
 	mut counter := 0
@@ -168,10 +167,10 @@ fn (a Axis) to_string() string {
 		if counter < options.len - 1 {
 			result += ',\n\t\t'
 		}
-		else {
-			result += ']'
-		}
+		
 	}
+
+	result += '\t\t]'
 
 	return result
 }
