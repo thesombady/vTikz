@@ -112,7 +112,7 @@ pub fn (mut t Tikz) add_function3d(func string, xlim [2]f32, ylim [2]f32, type_ 
 	}
 	t.axis.xlim = xlim
 	t.axis.samples = 20
-	t.axis.axis_3d = &Axis_3d{ydomain: ylim}
+	t.axis.options_3d= &Options_3d{ydomain: ylim}
 }
 
 // t.add_scatter3d([]f32, []f32, []f32, Plot3d_type) adds a 3d scatter plot to the Tikz object
@@ -137,7 +137,7 @@ pub fn (mut t Tikz) add_scatter3d(z []f32, x []f32, y []f32, type_ Plot3d_type) 
 		},
 	}
 
-	t.axis.axis_3d = &Axis_3d{}
+	t.axis.options_3d = &Options_3d{}
 }
 
 // set_command(string, []string, bool) returns a string with the command
@@ -190,7 +190,7 @@ fn (t Tikz) content(mut axis_content []string, idx int) string {
 			*/
 		}
 		Function3d {
-			if t.axis.axis_3d.fill != .@none {
+			if t.axis.options_3d.fill != .@none {
 				axis_content[idx] += '\t' + set_command("addplot3", [id.plot.type_.to_string(),
 					'fill = ${t.axis.axis_3d.fill}'], true) + ' {${id.plot.func}};\n'
 			} else {
