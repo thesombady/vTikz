@@ -119,7 +119,7 @@ fn (a Axis) map_options() map[string]string{
 	result['title'] = a.title
 	result['xlabel'] = a.xlabel
 	result['ylabel'] = a.ylabel
-	result['samples'] = string(a.samples)
+	result['samples'] = a.samples.str()
 	result['domain'] = '${a.xlim[0]}:${a.xlim[1]}'
 	result['legend pos'] = a.legend_pos.to_string()
 	if a.xtick.len != 0 {
@@ -143,7 +143,7 @@ fn (a Axis) map_options() map[string]string{
 		result['ytick'] = ytick
 	}
 	result['grid style'] = a.grid_style
-	result['ymajorgrids'] = string(a.ymajor_grids)
+	result['ymajorgrids'] = a.ymajor_grids.str()
 	result['axis lines'] = a.axis_line.to_string()
 	return result
 }
