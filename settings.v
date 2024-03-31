@@ -63,6 +63,6 @@ pub fn (mut t Tikz) set_xtick(ticks []f32) {
 	t.axis.xtick = ticks
 }
 
-pub fn (mut t Tiks) set_grid(b bool) {
+pub fn (mut t Tikz) set_grid(b bool) {
 	t.axis.grid = b
 }
