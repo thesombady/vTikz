@@ -95,7 +95,7 @@ mut:
 	samples int = 100
 	axis_line Axis_line = .left
 	legend_pos Legend_pos = .north_west
-	grid_style string = 'dashed'
+	grid bool = false
 	enlarge_limits bool = true
 	xlim [2]f32 = [f32(-1.0), 1.0]!
 	xtick []f32
@@ -122,6 +122,13 @@ fn (a Axis) map_options() map[string]string{
 	result['samples'] = a.samples.str()
 	result['domain'] = '${a.xlim[0]}:${a.xlim[1]}'
 	result['legend pos'] = a.legend_pos.to_string()
+	if a.grid {
+		// Only default grid for now
+		result['grid'] = 'both'
+		result['grid style'] = 'line width=.1pt, draw=gray!10'
+		result['major grid style'] = 'line width=.2pt,draw=gray!50'
+		result['minor tick num'] = '2'
+	}
 	if a.xtick.len != 0 {
 		mut xtick := ''
 		for i, v in a.xtick {
