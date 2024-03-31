@@ -66,7 +66,7 @@ pub enum Axis_style {
 }
 
 fn (a Axis_style) to_string() string {
-	return match {
+	return match a {
 		.@none { 'axis' }
 		.log_x { 'semilogyaxis' }
 		.log_y { 'semilogxaxis' }
