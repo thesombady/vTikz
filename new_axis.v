@@ -128,6 +128,9 @@ fn (a Axis) map_options() map[string]string{
 		result['grid style'] = 'line width=.1pt, draw=gray!10'
 		result['major grid style'] = 'line width=.2pt,draw=gray!50'
 		result['minor tick num'] = '2'
+		if a.ymajor_grids {
+			result['ymajorgrids'] = 'true'
+		}
 	}
 	if a.xtick.len != 0 {
 		mut xtick := ''
@@ -149,8 +152,6 @@ fn (a Axis) map_options() map[string]string{
 		}
 		result['ytick'] = ytick
 	}
-	result['grid style'] = a.grid_style
-	result['ymajorgrids'] = a.ymajor_grids.str()
 	result['axis lines'] = a.axis_line.to_string()
 	return result
 }
