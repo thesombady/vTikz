@@ -192,7 +192,7 @@ fn (t Tikz) content(mut axis_content []string, idx int) string {
 		Function3d {
 			if t.axis.options_3d.fill != .@none {
 				axis_content[idx] += '\t' + set_command("addplot3", [id.plot.type_.to_string(),
-					'fill = ${t.axis.axis_3d.fill}'], true) + ' {${id.plot.func}};\n'
+					'fill = ${t.axis.options_3d.fill}'], true) + ' {${id.plot.func}};\n'
 			} else {
 				axis_content[idx] += '\t' + set_command("addplot3", [id.plot.type_.to_string()], true) + ' {${id.plot.func}};\n'
 			}

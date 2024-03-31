@@ -145,9 +145,10 @@ fn (a Axis) map_options() map[string]string{
 	result['grid style'] = a.grid_style
 	result['ymajorgrids'] = string(a.ymajor_grids)
 	result['axis lines'] = a.axis_line.to_string()
+	return result
 }
 
-fn (a axis) to_string() string {
+fn (a Axis) to_string() string {
 	mut result := '\\begin{${a.axis_style.to_string()}}['
 	options := a.map_options()
 	mut cbar := false
