@@ -62,3 +62,7 @@ pub fn (mut t Tikz) set_axis_line(line Axis_line) {
 pub fn (mut t Tikz) set_xtick(ticks []f32) {
 	t.axis.xtick = ticks
 }
+
+pub fn (mut t Tiks) set_grid(t bool) {
+	t.axis.grid = t
+}
