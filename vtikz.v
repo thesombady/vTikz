@@ -1,12 +1,13 @@
 module vtikz
+
 import os
 import time
-import math
+// import math
 
 // set_parameters([]string) returns a string with the parameters
 fn set_parameters(parameters []string) string {
 	mut result := '['
-	for i in 0..parameters.len {
+	for i in 0 .. parameters.len {
 		result += parameters[i]
 		if i != parameters.len - 1 {
 			result += ', '
@@ -14,7 +15,6 @@ fn set_parameters(parameters []string) string {
 	}
 	result += ']'
 	return result
-
 }
 
 pub struct Tikz {
@@ -22,45 +22,42 @@ mut:
 	axis Axis
 pub mut:
 	plots []Plot
-	pref Pref
+	pref  Pref
 }
 
 // Tikz.new(string, string, string) creates a new Tikz object
 pub fn Tikz.new(xlabel string, ylabel string, title string) Tikz {
-	return Tikz {
-		pref: Pref {
-		},
-		axis: Axis {
-			title: title,
-			xlabel: xlabel,
-			ylabel: ylabel,
-		},
+	return Tikz{
+		pref: Pref{}
+		axis: Axis{
+			title: title
+			xlabel: xlabel
+			ylabel: ylabel
+		}
 	}
 }
 
-
 // t.add_scatter([]f32, []f32, string, string) adds a scatter plot to the Tikz object
 pub fn (mut t Tikz) add_scatter(x []f32, y []f32, color string, legend string) {
-	
 	if x.len != y.len {
-		eprintln("Error: x and y must have the same length")
+		eprintln('Error: x and y must have the same length')
 		return
 	}
 
-	for i in 0..t.plots.len {
+	for i in 0 .. t.plots.len {
 		if t.plots[i].plot is Function3d || t.plots[i].plot is Scatter3d {
-			eprintln("Error: 3d plots only support a single input")
+			eprintln('Error: 3d plots only support a single input')
 			return
 		}
 	}
 
-	t.plots << Plot {
-		plot : Scatter_plot {
-			x: x,
-			y: y,
-			color: color,
-		},
-		legend: legend,
+	t.plots << Plot{
+		plot: Scatter_plot{
+			x: x
+			y: y
+			color: color
+		}
+		legend: legend
 	}
 
 	xlim := [x[0], x[x.len - 1]]!
@@ -72,18 +69,18 @@ pub fn (mut t Tikz) add_scatter(x []f32, y []f32, color string, legend string) {
 
 // t.add_function(string, string, string, [2]f32) adds a function to the Tikz object
 pub fn (mut t Tikz) add_function(func string, color string, legend string, xlim [2]f32) {
-	for i in 0..t.plots.len {
+	for i in 0 .. t.plots.len {
 		if t.plots[i].plot is Function3d || t.plots[i].plot is Scatter3d {
-			eprintln("Error: 3d plots only support a single input")
+			eprintln('Error: 3d plots only support a single input')
 			return
 		}
 	}
-	t.plots << Plot {
-		plot: Function_plot {
-			func: func,
-			color: color,
-		},
-		legend: legend,
+	t.plots << Plot{
+		plot: Function_plot{
+			func: func
+			color: color
+		}
+		legend: legend
 	}
 
 	if t.axis.xlim[0] > xlim[0] {
@@ -101,49 +98,70 @@ pub fn (mut t Tikz) add_function(func string, color string, legend string, xlim 
 // t.add_function3d(string, [2]f32, [2]f32, Plot3d_type) adds a 3d function to the Tikz object
 pub fn (mut t Tikz) add_function3d(func string, xlim [2]f32, ylim [2]f32, type_ Plot3d_type) {
 	if t.plots.len > 0 {
-		eprintln("Error: Heatmaps only support a single input")
+		eprintln('Error: Heatmaps only support a single input')
 		return
 	}
-	t.plots << Plot {
+	t.plots << Plot{
 		plot: Function3d{
-			func: func,
-			type_: type_,
-		},
+			func: func
+			type_: type_
+		}
 	}
 	t.axis.xlim = xlim
 	t.axis.samples = 20
-	t.axis.options_3d= &Options_3d{ydomain: ylim}
+	t.axis.options_3d = &Options_3d{
+		ydomain: ylim
+	}
 }
 
 // t.add_scatter3d([]f32, []f32, []f32, Plot3d_type) adds a 3d scatter plot to the Tikz object
 pub fn (mut t Tikz) add_scatter3d(z []f32, x []f32, y []f32, type_ Plot3d_type) {
 	if t.plots.len > 0 {
-		eprintln("Error: Heatmaps only support a single input")
+		eprintln('Error: Heatmaps only support a single input')
 		return
 	}
 	// We compute the equispaced grid as the xy
 	if x.len * y.len != z.len {
-		eprintln("The sum of elements in x and y must be equal to the length of z")
-		eprintln("Not ${x.len} * ${y.len}  = ${z.len}")
+		eprintln('The sum of elements in x and y must be equal to the length of z')
+		eprintln('Not ${x.len} * ${y.len}  = ${z.len}')
 		return
-	}	
+	}
 
-	t.plots << Plot {
-		plot: Scatter3d {
-			x: x,
-			y: y,
-			z: z,
-			type_: .surface,
-		},
+	t.plots << Plot{
+		plot: Scatter3d{
+			x: x
+			y: y
+			z: z
+			type_: .surface
+		}
 	}
 
 	t.axis.options_3d = &Options_3d{}
 }
 
+pub fn (mut t Tikz) draw(points []f32) {
+	if points.len % 2 != 0 {
+		eprintln('Must contain x-y pairs')
+		return
+	}
+
+	mut plot := Draw{}
+	for i := 0; i < points.len - 1; i += 2 {
+		plot.points << Point{
+			x: points[i]
+			y: points[i + 1]
+		}
+	}
+
+	t.plots << Plot{
+		plot: Plot_type(plot)
+	}
+}
+
 // set_command(string, []string, bool) returns a string with the command
 fn set_command(command string, parameters []string, is_tikz bool) string {
 	mut result := '\\${command}['
-	for i in 0..parameters.len {
+	for i in 0 .. parameters.len {
 		result += parameters[i]
 		if i != parameters.len - 1 {
 			result += ', '
@@ -159,20 +177,21 @@ fn set_command(command string, parameters []string, is_tikz bool) string {
 // t.content() returns the content of the axis
 fn (t Tikz) content(mut axis_content []string, idx int) string {
 	id := t.plots[idx]
-	match id.plot{
+	match id.plot {
 		Scatter_plot {
-			axis_content[idx] += '\t' + set_command("addplot", ["color = ${id.plot.color}",
-				"mark=${id.plot.mark.to_string()}",
-				"style = ${id.style.to_string()}"], true) + 'coordinates {\n'
-			for i in 0..id.plot.x.len {
+			axis_content[idx] += '\t' +
+				set_command('addplot', ['color = ${id.plot.color}', 'mark=${id.plot.mark.to_string()}', 'style = ${id.style.to_string()}'], true) +
+				'coordinates {\n'
+			for i in 0 .. id.plot.x.len {
 				axis_content[idx] += '\t\t(${id.plot.x[i]}, ${id.plot.y[i]})\n'
-			}	
+			}
 			axis_content[idx] += '\t};\n'
 		}
 		Function_plot {
-			axis_content[idx] += '\t' + set_command("addplot", ['color = ${id.plot.color}',
-				 'style = ${id.style.to_string()}'], true) + ' {${id.plot.func}};\n'
-		}		
+			axis_content[idx] += '\t' +
+				set_command('addplot', ['color = ${id.plot.color}', 'style = ${id.style.to_string()}'], true) +
+				' {${id.plot.func}};\n'
+		}
 		Scatter3d {
 			panic('Not yet implemented correctly')
 			/*
@@ -191,18 +210,32 @@ fn (t Tikz) content(mut axis_content []string, idx int) string {
 		}
 		Function3d {
 			if t.axis.options_3d.fill != .@none {
-				axis_content[idx] += '\t' + set_command("addplot3", [id.plot.type_.to_string(),
-					'fill = ${t.axis.options_3d.fill}'], true) + ' {${id.plot.func}};\n'
+				axis_content[idx] += '\t' +
+					set_command('addplot3', [id.plot.type_.to_string(), 'fill = ${t.axis.options_3d.fill}'], true) +
+					' {${id.plot.func}};\n'
 			} else {
-				axis_content[idx] += '\t' + set_command("addplot3", [id.plot.type_.to_string()], true) + ' {${id.plot.func}};\n'
+				axis_content[idx] += '\t' +
+					set_command('addplot3', [id.plot.type_.to_string()], true) +
+					' {${id.plot.func}};\n'
+			}
+		}
+		Draw {
+			axis_content[idx] += '\t' + set_command('draw', ['dashed, thin'], true)
+			for i in 0 .. id.plot.points.len {
+				axis_content[idx] += id.plot.points[i].to_string()
+				if i < id.plot.points.len - 1 {
+					axis_content[idx] += '--'
+				} else {
+					axis_content[idx] += ';\n'
+				}
 			}
 		}
 	}
 	if t.pref.show_legends {
 		axis_content[idx] += '\t\\addlegendentry{${id.legend}};\n'
 	}
-	
-	if idx < t.plots.len -1 {
+
+	if idx < t.plots.len - 1 {
 		return t.content(mut axis_content, idx + 1)
 	}
 
@@ -223,21 +256,21 @@ pub fn (t Tikz) plot(name string) {
 	if name == '' {
 		path = 'plot.tex'
 	} else if !name.contains('.tex') {
-		eprintln("Error: File must be a .tex file")
-		eprintln("Creating plot.tex")
+		eprintln('Error: File must be a .tex file')
+		eprintln('Creating plot.tex')
 		path = 'plot.tex'
 	} else {
 		path = name
 	}
 	mut file := os.create(path) or {
-		println("Error creating file")
+		println('Error creating file')
 		return
 	}
 
 	document := t.to_enviroment()
 
 	file.write(document.to_string().bytes()) or {
-		println("Error writing to file")
+		println('Error writing to file')
 		return
 	}
 
@@ -247,18 +280,16 @@ pub fn (t Tikz) plot(name string) {
 		compile(t, path)
 		// Removing the auxiliar files
 		time.sleep(1 * time.second) // Wait such that everything has compiled
-		
+
 		remove_aux(path)
 
 		if !t.pref.keep_tex {
-			os.rm(path) or {
-				eprintln("Error: File not found")
-			}
+			os.rm(path) or { eprintln('Error: File not found') }
 		}
 
 		// Open file
 		if t.pref.open_pdf {
-			os.system('open ${path[0..path.len-4]}.pdf') 
+			os.system('open ${path[0..path.len - 4]}.pdf')
 		}
 	}
 }
@@ -266,20 +297,19 @@ pub fn (t Tikz) plot(name string) {
 // t.compile(string) compiles the .tex file
 fn compile(t Tikz, path string) {
 	if t.pref.compiler == .pdflatex {
-		os.system("pdflatex ${path}")
+		os.system('pdflatex ${path}')
 	} else if t.pref.compiler == .texlive {
-		os.system("latexmk -pdf ${path}")
+		os.system('latexmk -pdf ${path}')
 	} else {
-		eprintln("Error: Compiler not found")
+		eprintln('Error: Compiler not found')
 	}
 }
 
 // remove_aux(string) removes the auxiliar files
 fn remove_aux(path string) {
-	for ext in ["aux", "log", "out", 'fls', 'fdb_latexmk', 'synctex.gz'] {
-		os.rm("${path[0..path.len - 4]}.${ext}") or {
-			eprintln("File: ${path[0..path.len-4]}.${ext} not found")
+	for ext in ['aux', 'log', 'out', 'fls', 'fdb_latexmk', 'synctex.gz'] {
+		os.rm('${path[0..path.len - 4]}.${ext}') or {
+			eprintln('File: ${path[0..path.len - 4]}.${ext} not found')
 		}
 	}
 }
-
