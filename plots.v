@@ -2,7 +2,7 @@ module vtikz
 
 struct Function_plot {
 	func  string
-	color string
+	color Color
 }
 
 struct Point {
@@ -24,7 +24,7 @@ mut:
 struct Scatter_plot {
 	x     []f32
 	y     []f32
-	color string
+	color Color
 mut:
 	mark Mark = .line
 }
@@ -35,9 +35,7 @@ struct Function3d {
 }
 
 struct Scatter3d {
-	z     []f32
-	x     []f32
-	y     []f32
+	table [][]f32
 	type_ Plot3d_type
 }
 

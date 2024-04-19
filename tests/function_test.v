@@ -15,7 +15,8 @@ fn test_function() {
 			xlim: [2]f32, e.g. [f32(-10), 10]!
 		)
 	*/
-	tikz.add_function('-0.5 * x^2 + 0.5', 'red', '$ x^2$', [f32(0.1), 1]!)
+	tikz.function( func: '-0.5 * x^2 + 0.5', color: .red)
+	// tikz.add_function('-0.5 * x^2 + 0.5', 'red', '$ x^2$', [f32(0.1), 1]!)
 	tikz.draw([f32(0), 0, 1, 2])
 	// Even though we give it a legend, it will not be shown unless we force it, or give another function
 	// tikz.set_show_legeneds(true)

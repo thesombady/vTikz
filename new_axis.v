@@ -28,12 +28,12 @@ pub enum Axis_line {
 fn (a Axis_line) to_string() string {
 	return match a {
 		.left { 'left' }
-		.right {'right'}		
+		.right { 'right' }
 		.box { 'box' }
 		.middle { 'middle' }
 		.center { 'center' }
-		.@none { 'none' }		
-	}	
+		.@none { 'none' }
+	}
 }
 
 pub enum Fill {
@@ -73,47 +73,47 @@ fn (a Axis_style) to_string() string {
 		.log { 'loglogaxis' }
 	}
 }
-	
+
 struct Options_3d {
 mut:
-	cmap Cmap = .jet
-	cbar bool = true
-	box bool = true
-	zlabel string = "z"
+	cmap    Cmap   = .jet
+	cbar    bool   = true
+	box     bool   = true
+	zlabel  string = 'z'
 	ydomain [2]f32 = [f32(-1.0), 1.0]!
+	as_heap bool
 pub mut:
-	fill Fill 
+	fill Fill
 }
 
 struct Axis {
 	ymajor_grids bool = true
 pub:
-	title string
-	xlabel string = "x"
-	ylabel string = "y"
+	title  string
+	xlabel string = 'x'
+	ylabel string = 'y'
 mut:
-	samples int = 100
-	axis_line Axis_line = .left
-	legend_pos Legend_pos = .north_west
-	grid bool = false
-	enlarge_limits bool = true
-	xlim [2]f32 = [f32(-1.0), 1.0]!
-	xtick []f32
-	ytick []f32
-
+	samples        int        = 100
+	axis_line      Axis_line  = .@none
+	legend_pos     Legend_pos = .north_west
+	grid           bool
+	enlarge_limits bool   = true
+	xlim           [2]f32 = [f32(-1.0), 1.0]!
+	xtick          []f32
+	ytick          []f32
 	// 3D plots
-	options_3d  &Options_3d = unsafe { nil } // We rework this
-	axis_style Axis_style = .@none
+	options_3d &Options_3d = unsafe { nil } // We rework this
+	axis_style Axis_style  = .@none
 }
 
-fn (a Axis) map_options() map[string]string{
+fn (a Axis) map_options() map[string]string {
 	mut result := map[string]string{}
 
-	if a.options_3d != unsafe{ nil } {
-		result['colormap'] = '${a.options_3d.cmap.to_string()}'
-		//result['box'] = 'box = {${a.axis_3d.box}}'
-		result['zlabel'] = '{${a.options_3d.zlabel}}'
-		result['y domain'] = '{${a.options_3d.ydomain[0]}:${a.options_3d.ydomain[1]}}'
+	if a.options_3d != unsafe { nil } {
+		// result['colormap'] = '${a.options_3d.cmap.to_string()}' // FIX: Moved to the function below
+		// result['box'] = 'box = {${a.axis_3d.box}}'
+		result['zlabel'] = '${a.options_3d.zlabel}'
+		result['y domain'] = '${a.options_3d.ydomain[0]}:${a.options_3d.ydomain[1]}'
 	}
 
 	result['title'] = a.title
@@ -139,7 +139,7 @@ fn (a Axis) map_options() map[string]string{
 			if i < a.xtick.len - 1 {
 				xtick += ','
 			}
-		}	
+		}
 		result['xtick'] = xtick
 	}
 	if a.ytick.len != 0 {
@@ -152,12 +152,14 @@ fn (a Axis) map_options() map[string]string{
 		}
 		result['ytick'] = ytick
 	}
-	result['axis lines'] = a.axis_line.to_string()
+	if a.axis_line != .@none {
+		result['axis lines'] = a.axis_line.to_string()
+	}
 	return result
 }
 
 fn (a Axis) to_string() string {
-	mut result := '\\begin{${a.axis_style.to_string()}}['
+	mut result := '\\begin{${a.axis_style.to_string()}}[\n\t\t'
 	options := a.map_options()
 	mut cbar := false
 
@@ -166,7 +168,11 @@ fn (a Axis) to_string() string {
 	}
 
 	if cbar {
-		result += 'colorbar,'
+		result += 'colorbar, {${a.options_3d.cmap.to_string()}}, '
+		if a.options_3d.as_heap {
+			result += 'view = {0}{90},'
+		}
+		result += '\n\t\t'
 	}
 
 	mut counter := 0
@@ -175,10 +181,9 @@ fn (a Axis) to_string() string {
 		if counter < options.len - 1 {
 			result += ',\n\t\t'
 		}
-		
 	}
 
-	result += '\t]\n'
+	result += ']\n'
 
 	return result
 }
